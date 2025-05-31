@@ -1,14 +1,128 @@
 --
+-- PostgreSQL database cluster dump
+--
+
+-- Started on 2025-05-31 12:08:49 CEST
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE web_anon;
+ALTER ROLE web_anon WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+
+--
+-- User Configurations
+--
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
 -- PostgreSQL database dump
 --
 
 -- Dumped from database version 14.17
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-05-31 11:08:14 CEST
+-- Started on 2025-05-31 12:08:49 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: admin
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+ALTER SCHEMA public OWNER TO admin;
+
+--
+-- TOC entry 3372 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: admin
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2025-05-31 12:08:50 CEST
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "locodb" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.17
+-- Dumped by pg_dump version 17.0
+
+-- Started on 2025-05-31 12:08:50 CEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3401 (class 1262 OID 16384)
+-- Name: locodb; Type: DATABASE; Schema: -; Owner: admin
+--
+
+CREATE DATABASE locodb WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE locodb OWNER TO admin;
+
+\connect locodb
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -35,7 +149,6 @@ SET default_table_access_method = heap;
 -- TOC entry 212 (class 1259 OID 25353)
 -- Name: functions; Type: TABLE; Schema: public; Owner: admin
 --
-CREATE ROLE web_anon NOLOGIN;
 
 CREATE TABLE public.functions (
     id integer NOT NULL,
@@ -72,7 +185,7 @@ CREATE SEQUENCE public.functions_id_seq
 ALTER SEQUENCE public.functions_id_seq OWNER TO admin;
 
 --
--- TOC entry 3403 (class 0 OID 0)
+-- TOC entry 3404 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: functions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
 --
@@ -123,7 +236,7 @@ CREATE SEQUENCE public.locos_id_seq
 ALTER SEQUENCE public.locos_id_seq OWNER TO admin;
 
 --
--- TOC entry 3406 (class 0 OID 0)
+-- TOC entry 3407 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: locos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
 --
@@ -177,7 +290,7 @@ COPY public.locos (id, name, address, icon, thumbnail, maxspeed, speedstep, full
 
 
 --
--- TOC entry 3408 (class 0 OID 0)
+-- TOC entry 3409 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: functions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
@@ -186,7 +299,7 @@ SELECT pg_catalog.setval('public.functions_id_seq', 331, true);
 
 
 --
--- TOC entry 3409 (class 0 OID 0)
+-- TOC entry 3410 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: locos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
@@ -231,7 +344,7 @@ ALTER TABLE ONLY public.functions
 
 
 --
--- TOC entry 3401 (class 0 OID 0)
+-- TOC entry 3402 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: admin
 --
@@ -242,7 +355,7 @@ GRANT USAGE ON SCHEMA public TO web_anon;
 
 
 --
--- TOC entry 3402 (class 0 OID 0)
+-- TOC entry 3403 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: TABLE functions; Type: ACL; Schema: public; Owner: admin
 --
@@ -251,7 +364,7 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE public.functions TO web_anon;
 
 
 --
--- TOC entry 3404 (class 0 OID 0)
+-- TOC entry 3405 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: SEQUENCE functions_id_seq; Type: ACL; Schema: public; Owner: admin
 --
@@ -260,7 +373,7 @@ GRANT SELECT,USAGE ON SEQUENCE public.functions_id_seq TO web_anon;
 
 
 --
--- TOC entry 3405 (class 0 OID 0)
+-- TOC entry 3406 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: TABLE locos; Type: ACL; Schema: public; Owner: admin
 --
@@ -269,7 +382,7 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE public.locos TO web_anon;
 
 
 --
--- TOC entry 3407 (class 0 OID 0)
+-- TOC entry 3408 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: SEQUENCE locos_id_seq; Type: ACL; Schema: public; Owner: admin
 --
@@ -277,8 +390,68 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE public.locos TO web_anon;
 GRANT SELECT,USAGE ON SEQUENCE public.locos_id_seq TO web_anon;
 
 
--- Completed on 2025-05-31 11:08:14 CEST
+-- Completed on 2025-05-31 12:08:50 CEST
 
 --
 -- PostgreSQL database dump complete
 --
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.17
+-- Dumped by pg_dump version 17.0
+
+-- Started on 2025-05-31 12:08:50 CEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: admin
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+ALTER SCHEMA public OWNER TO admin;
+
+--
+-- TOC entry 3372 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: admin
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2025-05-31 12:08:51 CEST
+
+--
+-- PostgreSQL database dump complete
+--
+
+-- Completed on 2025-05-31 12:08:51 CEST
+
+--
+-- PostgreSQL database cluster dump complete
+--
+

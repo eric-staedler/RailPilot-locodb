@@ -35,6 +35,7 @@ SET default_table_access_method = heap;
 -- TOC entry 212 (class 1259 OID 25353)
 -- Name: functions; Type: TABLE; Schema: public; Owner: admin
 --
+CREATE ROLE web_anon NOLOGIN;
 
 CREATE TABLE public.functions (
     id integer NOT NULL,

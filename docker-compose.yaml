@@ -2,7 +2,7 @@ version: "3.8"
 services:
   db:
     image: postgres:14-alpine
-    container_name: 1locodb
+    container_name: locodb
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: <Your-Password>
@@ -10,26 +10,25 @@ services:
     volumes:
       - 1db_data:/var/lib/postgresql/data
     ports:
-      - 15432:5432
+      - 5432:5432
     command: >
-      sh -c "apk add --no-cache curl && curl -fsSL
+      sh -c "apk add --no-cache curl && curl -H 'Cache-Control: no-cache' -fsSL
       https://raw.githubusercontent.com/RealPCBUILD3R/RailPilot-locodb/refs/heads/main/SQL/schema.sql
       -o /docker-entrypoint-initdb.d/init.sql && exec docker-entrypoint.sh
       postgres"
     restart: unless-stopped
-  1postgrest:
+  postgrest:
     image: postgrest/postgrest:latest
-    container_name: 1locoapi
+    container_name: locoapi
     ports:
-      - 13000:3000
+      - 3000:3000
     environment:
-      PGRST_DB_URI: postgres://admin:<Your-Password>@1db:5432/locodb
+      PGRST_DB_URI: postgres://admin:<Your-Password>@db:5432/locodb
       PGRST_DB_SCHEMA: public
       PGRST_DB_ANON_ROLE: web_anon
     depends_on:
-      - 1db
+      - db
     restart: unless-stopped
 volumes:
   db_data: null
 networks: {}
-

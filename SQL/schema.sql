@@ -108,9 +108,6 @@ SET row_security = off;
 -- Name: locodb; Type: DATABASE; Schema: -; Owner: admin
 --
 
-CREATE DATABASE locodb WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
-
-
 ALTER DATABASE locodb OWNER TO admin;
 
 \connect locodb

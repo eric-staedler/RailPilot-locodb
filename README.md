@@ -248,16 +248,12 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
 
 - **Do Not Expose to the Public Internet**  
   - The database has no built-in user/password authentication beyond the PostgreSQL “admin” user.  
-  - PostgREST by default allows anonymous (`web_anon`) read access to the `public` schema.  
-  - If you expose port 5432 or 3000 to the Internet without firewalling or a VPN, anyone could query or (depending on PostgREST permissions) modify the locomotive data.  
-  - **Recommendation:** Keep the Raspberry Pi behind a router’s firewall or on a private VLAN. If you need remote access, use a VPN or SSH tunnel.
+  - PostgREST by default allows anonymous (`web_anon`) access to the `public` schema.  
+  - If you expose port 5432 or 3000 to the Internet without firewalling or a VPN, anyone could read, modify, delete or even upload harmful data to your database. 
+  - **Recommendation:** Keep the Raspberry Pi behind a router’s firewall or on a private VLAN. If you need remote access, use a VPN.
 
 - **Change Default Password**  
   - Choose a strong, unique password in `docker-compose.yaml` for `POSTGRES_PASSWORD`.  
-  - If you suspect the password is compromised, shut down the containers, change the password, and re‐initialize the services.
-
-- **Limit PostgREST Permissions**  
-  - By default, the `web_anon` role can only `SELECT` from tables in `public`. If you wish to tighten permissions, modify the schema (in `SQL/schema.sql`) to grant more restrictive privileges or add authentication layers in front of PostgREST (e.g., Nginx + JWT).
 
 ---
 
@@ -292,15 +288,6 @@ The `schema.sql` file defines:
 
 This project is open source under the **MIT License**. See [LICENSE](LICENSE) for details.
 
-```
-MIT License
-
-Copyright (c) 2025 PCBUILD3R
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-… [full text in LICENSE file] …
-```
-
 ---
 
 > **Summary**  
@@ -308,6 +295,5 @@ Permission is hereby granted, free of charge, to any person obtaining a copy
 > - Install Docker & Docker Compose on your Raspberry Pi.  
 > - Run `docker-compose up -d` to build and start the database (`locodb`) and API (`locoapi`).  
 > - Keep services behind a firewall; do not expose ports 5432/3000 to the public Internet.  
-> - Point your RailPilot app to `http://<raspberrypi-ip>:3000` to read locomotive data.  
 > - Enjoy a local, offline database for your RailPilot setup!
 ```

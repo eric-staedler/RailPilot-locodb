@@ -296,4 +296,3 @@ This project is open source under the **MIT License**. See [LICENSE](LICENSE) fo
 > - Run `docker-compose up -d` to build and start the database (`locodb`) and API (`locoapi`).  
 > - Keep services behind a firewall; do not expose ports 5432/3000 to the public Internet.  
 > - Enjoy a local, offline database for your RailPilot setup!
-```

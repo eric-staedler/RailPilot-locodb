@@ -25,10 +25,10 @@ This repository provides a PostgreSQL database and a PostgREST API for the RailP
 
 ## Prerequisites
 
-- A Raspberry Pi running **Raspberry Pi OS** (32 bit or 64 bit; this guide assumes a Debian-based OS).  
+- A Raspberry Pi running **Raspberry Pi OS** (32 bit or 64 bit; this guide assumes a Debian-based OS). Or any other device running a Debian-based OS. 
 - A user account with `sudo` privileges.  
-- A working network connection (to pull Docker images and download the SQL schema during initialization).  
-- At least **2 GB** of free storage for Docker images, volumes, and data.  
+- A working internet connection (to pull Docker images and download the SQL schema during initialization).  
+- At least **4 GB** of free storage for Docker images, volumes, and data.  
 - Basic familiarity with the command line / terminal.
 
 ---
@@ -59,7 +59,7 @@ RailPilot-locodb/
     - `COPY` commands that preload the database with sample locomotives and associated “functions” data.
 
 - **LICENSE**  
-  - MIT License; free to use/modify with attribution.
+  - MIT License
 
 ---
 
@@ -68,49 +68,7 @@ RailPilot-locodb/
 Follow these steps to install Docker, configure the RailPilot locomotive database, and launch the services on your Raspberry Pi.
 
 ### 1. Install Docker & Docker Compose
-
-1. **Update package lists**  
-   ```bash
-   sudo apt update
-   ```
-
-2. **Install Docker Engine**  
-   ```bash
-   sudo apt install -y docker.io
-   ```
-
-3. **Install Docker Compose**  
-   On recent Raspberry Pi OS releases, `docker-compose` is available via `apt`. If it is not, you can install the plugin or use `pip`. The simplest method:
-   ```bash
-   sudo apt install -y docker-compose
-   ```
-   > **Note:** If `docker-compose` is not found after this step, you can install it via `pip3`:
-   > ```bash
-   > sudo apt install -y python3-pip
-   > sudo pip3 install docker-compose
-   > ```
-
-4. **Enable and Start Docker**  
-   ```bash
-   sudo systemctl enable docker
-   sudo systemctl start docker
-   ```
-
-5. **Add Your User to the Docker Group**  
-   This allows you to run Docker commands without `sudo`.
-   ```bash
-   sudo usermod -aG docker $USER
-   # Log out and back in (or run: newgrp docker)
-   ```
-
-6. **Verify Installation**  
-   ```bash
-   docker --version
-   docker-compose --version
-   ```
-   You should see version numbers for both.
-
----
+Follow [this guide](https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script)
 
 ### 2. Clone this Repository
 
@@ -191,8 +149,7 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
    - In **vi/vim**: press `Esc`, type `:wq`, then press `Enter`.
 
 > **Tip:**  
-> - Do **not** commit or share your password publicly.  
-> - If you ever need to change the password later, update both fields and restart the services (see Step 4).
+> - Do **not** commit or share your password publicly.
 
 ---
 
@@ -223,24 +180,9 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
    - After this completes, the `locodb` container continues running with the data loaded.
 
 4. **Verify Database Initialization** (optional)  
-   a. Enter the running `locodb` container shell:
-   ```bash
-   docker exec -it locodb bash
-   ```
-   b. Connect to `psql`:
-   ```bash
-   psql -U admin -d locodb
-   ```
-   c. Check tables:
-   ```sql
-   \dt
-   ```
-   You should see tables such as `locos`, `functions`, etc.  
-   d. Query sample data:
-   ```sql
-   SELECT id, name, address FROM public.locos LIMIT 5;
-   ```
-   e. Exit `psql` with `\q`, then exit the container shell with `exit`.
+   1. Open a web browser
+   2. Go to http://<IP-Address of your Device running locodb>:3000/locos
+   3. You should see something like this: [{"id":46,"name":"Salzburger","address":52,"icon":"\\x2f396a2f34414151536b5a4a5...
 
 5. **PostgREST API**  
    - The `locoapi` (PostgREST) container will wait for `locodb` to be available.  
@@ -266,8 +208,8 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
    - Runs `postgrest/postgrest:latest`.  
    - Connects to the `locodb` database using the `admin` user and password you configured.  
    - Serves a RESTful JSON API on port **3000**. For example:  
-     - `GET http://<raspberrypi-ip>:3000/locos` returns all locomotives.  
-     - `GET http://<raspberrypi-ip>:3000/functions?loco_address=eq.52` returns all functions for the locomotive with address 52.  
+     - `GET http://<IP-Address of your Device running locodb>:3000/locos` returns all locomotives.  
+     - `GET http://<IP-Address of your Device running locodb>:3000/functions?loco_address=eq.52` returns all functions for the locomotive with address 52.  
    - The `PGRST_DB_ANON_ROLE=web_anon` environment variable means anyone on your local network can query the API without additional authentication.  
 
 3. **Volume `db_data`**  
@@ -283,10 +225,7 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
 ## Usage
 
 1. **RailPilot App Configuration**  
-   - In your RailPilot application (running on your phone, tablet, or another device), point the backend API URL to your Raspberry Pi’s IP or hostname, port **3000**. For example:  
-     ```
-     http://192.168.1.50:3000
-     ```  
+   - In your RailPilot application (running on your iPhone, iPad, or another device), set the IP address of the locomotive database to the address of your Device running locodb, set the port to **3000** and the protocol to http://. 
    - The app can then fetch locomotive information (e.g., names, addresses, icons) and function definitions directly from this local API.
 
 2. **Managing the Containers**  
@@ -301,19 +240,6 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
    - **View container logs** (e.g., to debug initialization issues):  
      ```bash
      docker-compose logs -f
-     ```
-
-3. **Changing the Database Schema**  
-   - If you modify `SQL/schema.sql` locally (for example, to add new tables or columns), you will need to re‐initialize the database:  
-     1. `docker-compose down -v` (removes the volume and all data)  
-     2. `docker-compose up -d` (re-runs the schema import with your updated `schema.sql`)  
-
-4. **Updating the Repository**  
-   - If GitHub’s `SQL/schema.sql` changes upstream and you want to pull those changes locally, you can:  
-     ```bash
-     git pull origin main
-     docker-compose down -v
-     docker-compose up -d
      ```
 
 ---

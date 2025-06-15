@@ -175,9 +175,8 @@ Le`docker-compose.yaml`Le fichier utilise des espaces réservés pour les inform
 
 3.  **Initialisation de premier temps**
 
-    -   Le`locodb`(PostgreSQL) Le conteneur exécute un shot`command:`qui installe`curl`puis récupérer`SQL/schema.sql`du référentiel github`main`bifurquer. Il tue ce SQL directement`psql`, lequel:
-        1.  Crée toutes les tables, séquences, contraintes, etc.
-        2.  Copie des exemples de données dans le`locos`et`functions`tableaux.
+    1.  Crée toutes les tables, séquences, contraintes, etc.
+    2.  Copie des exemples de données dans le`locos`et`functions`tableaux.
 
     -   Une fois cette fin terminée, le`locodb`Le conteneur continue de s'exécuter avec les données chargées.
 
@@ -200,18 +199,13 @@ Le`docker-compose.yaml`Le fichier utilise des espaces réservés pour les inform
         -   `POSTGRES_USER=admin`
         -   `POSTGRES_PASSWORD=<your_password>`
         -   `POSTGRES_DB=locodb`
-    -   Au démarrage, installe`curl`Et fonctionne:
-        ```bash
-        curl -H 'Cache-Control: no-cache' -fsSL        https://raw.githubusercontent.com/RealPCBUILD3R/RailPilot-locodb/refs/heads/main/SQL/schema.sql        | psql -U admin -d locodb
-        ```
-    -   Cela initialise le schéma de la base de données (tableaux, séquences, contraintes) et charge des données de locomotive d'échantillons.
 
 2.  **Service post-poitrel (`locoapi`)**
     -   Courses`postgrest/postgrest:latest`.
     -   Se connecte au`locodb`base de données à l'aide du`admin`utilisateur et mot de passe que vous avez configuré.
     -   Sert une API JSON reposante sur le port**3000**. Par exemple:
         -   `GET http://<IP-Address of your Device running locodb>:3000/locos`Renvoie toutes les locomotives.
-        -   `GET http://<IP-Address of your Device running locodb>:3000/functions?loco_address=eq.52` returns all functions for the locomotive with address 52.  
+        -   `GET http://<IP-Address of your Device running locodb>:3000/functions?loco_address=eq.52`Renvoie toutes les fonctions pour la locomotive avec l'adresse 52.
     -   Le`PGRST_DB_ANON_ROLE=web_anon`La variable d'environnement signifie que toute personne sur votre réseau local peut interroger l'API sans authentification supplémentaire.
 
 3.  **Volume`db_data`**

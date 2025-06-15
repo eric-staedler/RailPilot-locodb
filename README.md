@@ -172,19 +172,18 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
 
    You should see both `locodb` (PostgreSQL) and `locoapi` (PostgREST) running.
 
-3. **First‐Time Initialization**  
-   - The `locodb` (PostgreSQL) container runs a one‐shot `command:` that installs `curl` and then fetches `SQL/schema.sql` from the GitHub repository’s `main` branch. It pipes that SQL directly into `psql`, which:
+3. **First‐Time Initialization**
      1. Creates all tables, sequences, constraints, etc.  
      2. Copies sample data into the `locos` and `functions` tables.
 
    - After this completes, the `locodb` container continues running with the data loaded.
 
-4. **Verify Database Initialization** (optional)  
+5. **Verify Database Initialization** (optional)  
    1. Open a web browser
    2. Go to http://<IP-Address of your Device running locodb>:3000/locos
    3. You should see something like this: [{"id":46,"name":"Salzburger","address":52,"icon":"\\x2f396a2f34414151536b5a4a5...
 
-5. **PostgREST API**  
+6. **PostgREST API**  
    - The `locoapi` (PostgREST) container will wait for `locodb` to be available.  
    - Once it can connect, it exposes a RESTful JSON API at **port 3000**. By default, the anonymous role `web_anon` can query the `public` schema.
 
@@ -197,12 +196,7 @@ The `docker-compose.yaml` file uses placeholders for PostgreSQL credentials. You
    - Environment variables:  
      - `POSTGRES_USER=admin`  
      - `POSTGRES_PASSWORD=<your_password>`  
-     - `POSTGRES_DB=locodb`  
-   - On startup, installs `curl` and runs:
-     ```bash
-     curl -H 'Cache-Control: no-cache' -fsSL        https://raw.githubusercontent.com/RealPCBUILD3R/RailPilot-locodb/refs/heads/main/SQL/schema.sql        | psql -U admin -d locodb
-     ```
-   - This initializes the database schema (tables, sequences, constraints) and loads sample locomotive data.
+     - `POSTGRES_DB=locodb` 
 
 2. **PostgREST Service (`locoapi`)**  
    - Runs `postgrest/postgrest:latest`.  

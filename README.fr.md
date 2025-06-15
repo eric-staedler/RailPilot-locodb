@@ -211,7 +211,7 @@ Le`docker-compose.yaml`Le fichier utilise des espaces réservés pour les inform
     -   Se connecte au`locodb`base de données à l'aide du`admin`utilisateur et mot de passe que vous avez configuré.
     -   Sert une API JSON reposante sur le port**3000**. Par exemple:
         -   `GET http://<IP-Address of your Device running locodb>:3000/locos`Renvoie toutes les locomotives.
-        -   `GET http://<IP-Address of your Device running locodb>:3000/functions?loco_address=eq.52`Renvoie toutes les fonctions pour la locomotive avec l'adresse 52.
+        -   `GET http://<IP-Address of your Device running locodb>:3000/functions?loco_address=eq.52` returns all functions for the locomotive with address 52.  
     -   Le`PGRST_DB_ANON_ROLE=web_anon`La variable d'environnement signifie que toute personne sur votre réseau local peut interroger l'API sans authentification supplémentaire.
 
 3.  **Volume`db_data`**

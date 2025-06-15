@@ -175,9 +175,8 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL -Anmelde
 
 3.  **Initialisierung der ersten Zeit**
 
-    -   Der`locodb`(PostgreSQL) Container führt einen Ein -Shot aus`command:`das installiert`curl`und dann holt sich`SQL/schema.sql`Aus dem Github -Repository's`main`Zweig. Es wächst, in die sich direkt an die SQL befasst`psql`, welche:
-        1.  Erstellt alle Tabellen, Sequenzen, Einschränkungen usw.
-        2.  Kopiert Beispieldaten in die`locos`Und`functions`Tische.
+    1.  Erstellt alle Tabellen, Sequenzen, Einschränkungen usw.
+    2.  Kopiert Beispieldaten in die`locos`Und`functions`Tische.
 
     -   Nach Abschluss ist die`locodb`Der Container wird mit den geladenen Daten fortgesetzt.
 
@@ -200,11 +199,6 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL -Anmelde
         -   `POSTGRES_USER=admin`
         -   `POSTGRES_PASSWORD=<your_password>`
         -   `POSTGRES_DB=locodb`
-    -   Installationen beim Start`curl`und läuft:
-        ```bash
-        curl -H 'Cache-Control: no-cache' -fsSL        https://raw.githubusercontent.com/RealPCBUILD3R/RailPilot-locodb/refs/heads/main/SQL/schema.sql        | psql -U admin -d locodb
-        ```
-    -   Dies initialisiert das Datenbankschema (Tabellen, Sequenzen, Einschränkungen) und lädt Beispiel -Lokomotivdaten.
 
 2.  **Postgrest -Service (`locoapi`)**
     -   Läuft`postgrest/postgrest:latest`.

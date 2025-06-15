@@ -175,9 +175,8 @@ IL`docker-compose.yaml`Il file utilizza segnaposto per le credenziali di Postgre
 
 3.  **Inizializzazione in prima volta**
 
-    -   IL`locodb`(PostgreSQL) Container esegue un solo colpo`command:`che installa`curl`e poi prendono`SQL/schema.sql`Dal repository github`main`ramo. Si tuba direttamente in cui SQL`psql`, Quale:
-        1.  Crea tutte le tabelle, sequenze, vincoli, ecc.
-        2.  Copie i dati di esempio nel file`locos`E`functions`tavoli.
+    1.  Crea tutte le tabelle, sequenze, vincoli, ecc.
+    2.  Copie i dati di esempio nel file`locos`E`functions`tavoli.
 
     -   Dopo questo è completato, il`locodb`Il contenitore continua a funzionare con i dati caricati.
 
@@ -200,11 +199,6 @@ IL`docker-compose.yaml`Il file utilizza segnaposto per le credenziali di Postgre
         -   `POSTGRES_USER=admin`
         -   `POSTGRES_PASSWORD=<your_password>`
         -   `POSTGRES_DB=locodb`
-    -   All'avvio, installa`curl`e corre:
-        ```bash
-        curl -H 'Cache-Control: no-cache' -fsSL        https://raw.githubusercontent.com/RealPCBUILD3R/RailPilot-locodb/refs/heads/main/SQL/schema.sql        | psql -U admin -d locodb
-        ```
-    -   Ciò inizializza lo schema del database (tabelle, sequenze, vincoli) e carica i dati di locomotiva di esempio.
 
 2.  **Servizio postgrest (`locoapi`)**
     -   Corse`postgrest/postgrest:latest`.
@@ -251,7 +245,7 @@ IL`docker-compose.yaml`Il file utilizza segnaposto per le credenziali di Postgre
 -   **Non esporre a Internet pubblico**
     -   Il database non ha un'autenticazione utente/password integrata oltre l'utente "amministratore" di PostgreSQL.
     -   Postgrest per impostazione predefinita consente Anonimo (`web_anon`) accesso al file`public`schema.
-    -   Se si esponi la porta 5432 o 3000 a Internet senza firewall o una VPN, chiunque potrebbe leggere, modificare, eliminare o persino caricare dati dannosi nel tuo database.
+    -   Se si espone la porta 5432 o 3000 a Internet senza firewall o una VPN, chiunque potrebbe leggere, modificare, eliminare o persino caricare dati dannosi nel tuo database.
     -   **Raccomandazione:**Tieni il Raspberry Pi dietro un firewall di un router o su una VLAN privata. Se hai bisogno di accesso remoto, utilizzare una VPN.
 
 -   **Modificare la password predefinita**

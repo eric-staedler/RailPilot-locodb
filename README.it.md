@@ -251,7 +251,7 @@ IL`docker-compose.yaml`Il file utilizza segnaposto per le credenziali di Postgre
 -   **Non esporre a Internet pubblico**
     -   Il database non ha un'autenticazione utente/password integrata oltre l'utente "amministratore" di PostgreSQL.
     -   Postgrest per impostazione predefinita consente Anonimo (`web_anon`) accesso al file`public`schema.
-    -   Se si espone la porta 5432 o 3000 a Internet senza firewall o una VPN, chiunque potrebbe leggere, modificare, eliminare o persino caricare dati dannosi nel tuo database.
+    -   Se si esponi la porta 5432 o 3000 a Internet senza firewall o una VPN, chiunque potrebbe leggere, modificare, eliminare o persino caricare dati dannosi nel tuo database.
     -   **Raccomandazione:**Tieni il Raspberry Pi dietro un firewall di un router o su una VLAN privata. Se hai bisogno di accesso remoto, utilizzare una VPN.
 
 -   **Modificare la password predefinita**

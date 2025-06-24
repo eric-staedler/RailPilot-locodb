@@ -17,7 +17,7 @@ Dieses Repository bietet eine PostgreSQL -Datenbank und eine Postgrest -API für
     -   [4. Startdienste mit Docker Compose](#4-launch-services-with-docker-compose)
 4.  [Wie es funktioniert](#how-it-works)
 5.  [Verwendung](#usage)
-6.  [Sicherheitsüberlegungen](#security-considerations)
+6.  [Security Considerations](#security-considerations)
 7.  [Datenbankschemaübersicht](#database-schema-overview)
 8.  [Lizenz](#license)
 
@@ -93,7 +93,7 @@ Folgen[Dieser Leitfaden](https://docs.docker.com/engine/install/debian/#install-
 
 Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL -Anmeldeinformationen. Sie müssen ersetzen`<Your-Password>`In**zwei**Orte:
 
-1.  **Postgres_password**(für die`db`Service)
+1.  **Postgres_password**(für die`db` service)  
 
 2.  **Pgrst_db_uri**(für die`postgrest`Dienst in der Verbindungszeichenfolge)
 
@@ -183,7 +183,7 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL -Anmelde
 4.  **Überprüfen Sie die Datenbankinitialisierung**(optional)
     1.  Öffnen Sie einen Webbrowser
     2.  Gehen Sie zu http&#x3A; //<IP-Address of your Device running locodb>: 3000/locos
-    3.  Sie sollten so etwas sehen: \[{"ID": 46, "Name": "Salzburger", "Adresse": 52, "Symbol": "\\x2f396a2f34414151536b5a4a5...
+    3.  Sie sollten so etwas sehen: \[{"ID": 46, "Name": "Salzburger", "Adresse": 52, "Symbol": "\\Kassaka, 4414151536 Bakha 4 Bruder ...
 
 5.  **Postgrest -API**
     -   Der`locoapi`(Postgrest) Container warten auf`locodb`verfügbar sein.

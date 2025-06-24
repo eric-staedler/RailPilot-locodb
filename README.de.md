@@ -183,7 +183,7 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL -Anmelde
 4.  **Überprüfen Sie die Datenbankinitialisierung**(optional)
     1.  Öffnen Sie einen Webbrowser
     2.  Gehen Sie zu http&#x3A; //<IP-Address of your Device running locodb>: 3000/locos
-    3.  Sie sollten so etwas sehen: \[{"ID": 46, "Name": "Salzburger", "Adresse": 52, "Symbol": "\\Kassaka, 4414151536 Bakha 4 Bruder ...
+    3.  Sie sollten so etwas sehen: \[{"ID": 46, "Name": "Salzburger", "Adresse": 52, "Symbol": "\\x2f396a2f34414151536b5a4a5...
 
 5.  **Postgrest -API**
     -   Der`locoapi`(Postgrest) Container warten auf`locodb`verfügbar sein.

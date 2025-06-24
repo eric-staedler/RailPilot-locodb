@@ -5,7 +5,7 @@ services:
     container_name: locodb
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: <Your Secure Password>
+      POSTGRES_PASSWORD: <Your-Password>
       POSTGRES_DB: locodb
     volumes:
       - db_data:/var/lib/postgresql/data
@@ -19,7 +19,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      PGRST_DB_URI: postgres://admin:<Your Secure Password>@db:5432/locodb
+      PGRST_DB_URI: postgres://admin:<Your-Password>@db:5432/locodb
       PGRST_DB_SCHEMA: public
       PGRST_DB_ANON_ROLE: web_anon
     depends_on:

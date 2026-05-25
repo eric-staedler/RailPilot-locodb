@@ -29,7 +29,7 @@ Dieses Repository stellt eine PostgreSQL-Datenbank und eine PostgREST-API für d
 -   Ein Benutzerkonto mit`sudo`Privilegien.
 -   Eine funktionierende Internetverbindung (um Docker-Images abzurufen und das SQL-Schema während der Initialisierung herunterzuladen).
 -   Mindestens**4 GB**kostenloser Speicherplatz für Docker-Images, -Volumes und -Daten.
--   Grundlegende Vertrautheit mit der Kommandozeile/Terminal.
+-   Grundlegende Vertrautheit mit der Befehlszeile/dem Terminal.
 
 * * *
 
@@ -78,7 +78,7 @@ Folgen[diesen Leitfaden](https://docs.docker.com/engine/install/debian/#install-
 
 2.  Klonen Sie das GitHub-Repository:
     ```bash
-    git clone https://github.com/RealPCBUILD3R/RailPilot-locodb.git
+    git clone https://github.com/eric-staedler/RailPilot-locodb.git
     ```
     > Wenn Sie die ZIP-Datei auf andere Weise heruntergeladen haben, entpacken Sie sie, wo immer Sie möchten`cd`in diesen Ordner.
 
@@ -146,7 +146,7 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL-Anmeldei
 6.  Speichern und beenden:
 
     -   In**Nano**: drücken`CTRL+O`(schreiben),`Enter`, Dann`CTRL+X`(Ausfahrt).
-    -   In**Du**: drücken`Esc`, Typ`:wq`, und drücken Sie dann`Enter`.
+    -   In**Du**: drücken`Esc`, Typ`:wq`, dann drücken`Enter`.
 
 > **Tipp:**
 >
@@ -163,7 +163,7 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL-Anmeldei
     ```
 
     -   Der`-d`Flag bedeutet „getrennt“ (im Hintergrund ausgeführt).
-    -   Docker ruft die erforderlichen Bilder ab (`postgres:14-alpine`Und`postgrest/postgrest:latest`), erstellen Sie ein Docker-Volume mit dem Namen`db_data`, and start two containers named `locodb`Und`locoapi`.
+    -   Docker ruft die erforderlichen Bilder ab (`postgres:14-alpine`Und`postgrest/postgrest:latest`), erstellen Sie ein Docker-Volume mit dem Namen`db_data`und starten Sie zwei Container mit dem Namen`locodb`Und`locoapi`.
 
 2.  So überprüfen Sie, ob Container ausgeführt werden:
 
@@ -182,7 +182,7 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL-Anmeldei
 
 4.  **Überprüfen Sie die Datenbankinitialisierung**(optional)
     1.  Öffnen Sie einen Webbrowser
-    2.  Gehen Sie zu http&#x3A;//<IP-Address of your Device running locodb>:3000/Loks
+    2.  Gehen Sie zu http&#x3A;//<IP-Address of your Device running locodb>:3000/locos
     3.  Sie sollten etwa Folgendes sehen: \[{"id":46,"name": "Salzburger", "address":52,"icon":\\4414151536 bkha4kh...
 
 5.  **PostgREST-API**
@@ -224,7 +224,7 @@ Der`docker-compose.yaml`Die Datei verwendet Platzhalter für PostgreSQL-Anmeldei
     -   Stellen Sie in Ihrer RailPilot-Anwendung (die auf Ihrem iPhone, iPad oder einem anderen Gerät läuft) die IP-Adresse der Lokomotivdatenbank auf die Adresse Ihres Geräts ein, auf dem locodb läuft, und stellen Sie den Port auf ein**3000**und das Protokoll zu http&#x3A;//.
     -   Die App kann dann Lokinformationen (z. B. Namen, Adressen, Symbole) und Funktionsdefinitionen direkt von dieser lokalen API abrufen.
 
-2.  **Verwaltung der Container**
+2.  **Verwalten der Container**
     -   **Stoppen**beide Dienste:
         ```bash
         docker-compose down

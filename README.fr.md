@@ -78,7 +78,7 @@ Suivre[ce guide](https://docs.docker.com/engine/install/debian/#install-using-th
 
 2.  Clonez le dépôt GitHub :
     ```bash
-    git clone https://github.com/RealPCBUILD3R/RailPilot-locodb.git
+    git clone https://github.com/eric-staedler/RailPilot-locodb.git
     ```
     > Si vous avez téléchargé le ZIP par d'autres moyens, décompressez-le où vous le souhaitez et`cd`dans ce dossier.
 
@@ -221,7 +221,7 @@ Le`docker-compose.yaml`Le fichier utilise des espaces réservés pour les inform
 ## Usage
 
 1.  **Configuration de l'application RailPilot**
-    -   Dans votre application RailPilot (exécutée sur votre iPhone, iPad ou autre appareil), définissez l'adresse IP de la base de données des locomotives sur l'adresse de votre appareil exécutant locodb, définissez le port sur**3000**et le protocole vers http&#x3A;//.
+    -   In your RailPilot application (running on your iPhone, iPad, or another device), set the IP address of the locomotive database to the address of your Device running locodb, set the port to **3000**et le protocole vers http&#x3A;//.
     -   L'application peut ensuite récupérer des informations sur les locomotives (par exemple, noms, adresses, icônes) et des définitions de fonctions directement à partir de cette API locale.
 
 2.  **Gestion des conteneurs**

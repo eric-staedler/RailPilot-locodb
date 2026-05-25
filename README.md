@@ -79,7 +79,7 @@ Follow [this guide](https://docs.docker.com/engine/install/debian/#install-using
 
 2. Clone the GitHub repository:
    ```bash
-   git clone https://github.com/RealPCBUILD3R/RailPilot-locodb.git
+   git clone https://github.com/eric-staedler/RailPilot-locodb.git
    ```
    > If you downloaded the ZIP by other means, unzip it wherever you like and `cd` into that folder.
 

@@ -78,7 +78,7 @@ Seguire[questa guida](https://docs.docker.com/engine/install/debian/#install-usi
 
 2.  Clona il repository GitHub:
     ```bash
-    git clone https://github.com/RealPCBUILD3R/RailPilot-locodb.git
+    git clone https://github.com/eric-staedler/RailPilot-locodb.git
     ```
     > Se hai scaricato lo ZIP con altri mezzi, decomprimilo dove preferisci e`cd`in quella cartella.
 
@@ -163,7 +163,7 @@ IL`docker-compose.yaml`il file utilizza segnaposto per le credenziali PostgreSQL
     ```
 
     -   IL`-d`flag significa “staccato” (esecuzione in background).
-    -   Docker estrarrà le immagini necessarie (`postgres:14-alpine`E`postgrest/postgrest:latest`), creare un volume Docker denominato`db_data`e iniziare due contenitori denominati`locodb`E`locoapi`.
+    -   Docker estrarrà le immagini necessarie (`postgres:14-alpine`E`postgrest/postgrest:latest`), create a Docker volume named `db_data`e iniziare due contenitori denominati`locodb`E`locoapi`.
 
 2.  Per verificare che i contenitori siano in esecuzione:
 
@@ -176,7 +176,7 @@ IL`docker-compose.yaml`il file utilizza segnaposto per le credenziali PostgreSQL
 3.  **Prima inizializzazione**
 
     1.  Crea tutte le tabelle, sequenze, vincoli, ecc.
-    2.  Copia i dati del campione nel file`locos`E`functions`tavoli.
+    2.  Copia i dati di esempio nel file`locos`E`functions`tavoli.
 
     -   Al termine di questa operazione, il file`locodb`il contenitore continua a funzionare con i dati caricati.
 
